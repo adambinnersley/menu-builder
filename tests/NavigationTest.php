@@ -151,7 +151,7 @@ class NavigationTest extends TestCase {
         include dirname(__FILE__).DIRECTORY_SEPARATOR.'sample_data'.DIRECTORY_SEPARATOR.'array.php';
         $this->navigation->addLinks($nav_array);
         $this->assertFalse($this->navigation->hasLinks(['/link-doesnt-exists', '/', '/child/hippo']));
-        $this->assertTrue($this->navigation->hasLinks(['/child/child/help', '/', '/child/hippo']));
+        $this->assertTrue($this->navigation->hasLinks(['/child/child/help', '/my-link', '/child/hippo']));
         $this->assertFalse($this->navigation->hasLinks(42));
         $this->assertFalse($this->navigation->hasLinks(true));
         $this->assertFalse($this->navigation->hasLinks('/'));
