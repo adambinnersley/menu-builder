@@ -88,9 +88,7 @@ class Navigation {
      * @return string|false If the navigation class is set will return a string else will return false
      */
     public function getNavigationClass() {
-        if(is_string($this->elements['ul_class'])){
-            return $this->elements['ul_class'];
-        }
+        return $this->elements['ul_class'];
     }
     
     /**
@@ -113,9 +111,7 @@ class Navigation {
      * @return string|false If the navigation id is set will return a string else will return false
      */
     public function getNavigationID() {
-        if(is_string($this->elements['ul_id'])){
-            return $this->elements['ul_id'];
-        }
+        return $this->elements['ul_id'];
     }
     
     /**
