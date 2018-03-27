@@ -197,6 +197,9 @@ class NavigationTest extends TestCase {
         $this->assertEquals('<ul class="nav navbar-nav"><li><a href="/" title="Home">Home</a></li></ul>', $this->navigation->render());
         $this->navigation->addLink('About Me' , '/about-me')->setCurrentURI('/');
         $this->assertEquals('<ul class="nav navbar-nav"><li class="active"><a href="/" title="Home" class="active">Home</a></li><li><a href="/about-me" title="About Me">About Me</a></li></ul>', $this->navigation->render());
+        include dirname(__FILE__).DIRECTORY_SEPARATOR.'sample_data'.DIRECTORY_SEPARATOR.'array.php';
+        $navigation = new Navigation($nav_array, '/child/child/google');
+        $this->assertEquals('<ul class="nav navbar-nav"><li><a href="/my-link" title="Home">Home</a></li><li><a href="/help" title="Second">Second</a></li><li class="active"><a href="/hello" title="Hello" class="active">Hello</a><ul class="sub-menu"><li><a href="/child/google" title="First child">First child</a></li><li class="active"><a href="/child/help" title="Child Second" class="active">Child Second</a><ul><li class="active"><a href="/child/child/google" title="First Child-child" class="active">First Child-child</a></li><li><a href="/child/child/help" title="Child-child Second">Child-child Second</a></li><li><a href="/child/child/last-link" title="Last Child-child">Last Child-child</a></li></ul></li><li><a href="/child/last-link" title="Last Child">Last Child</a></li></ul></li><li><a href="https://www.google.co.uk#help" title="Google" target="_blank" rel="nofollow noopener" id="unique-link">Google</a></li><li><a href="/last-link" title="Last">Last</a><ul><li><a href="/child/turkey" title="Turkey">Turkey</a></li><li><a href="/child/hippo" title="Hippo">Hippo</a><ul><li><a href="/child/child/cars" title="Car">Car</a></li><li><a href="/child/child/animals" title="Animal">Animal</a></li><li><a href="/child/child/places" title="Place">Place</a></li></ul></li><li><a href="/child/dog" title="Dog">Dog</a></li></ul></li></ul>', $navigation->render());
     }
     
     /**
@@ -219,5 +222,8 @@ class NavigationTest extends TestCase {
     public function testRenderBreadcrumb(){
         $this->navigation->addLink('Home' , '/');
         $this->assertEquals('<ul class="breadcrumb"><li class="breadcrumb-item"><a href="/" title="Home">Home</a></li></ul>', $this->navigation->renderBreadcrumb());
+        include dirname(__FILE__).DIRECTORY_SEPARATOR.'sample_data'.DIRECTORY_SEPARATOR.'array.php';
+        $navigation = new Navigation($nav_array, '/child/child/google');
+        $this->assertEquals('<ul class="breadcrumb"><li class="breadcrumb-item"><a href="/my-link" title="Home">Home</a></li><li class="breadcrumb-item"><a href="/hello" title="Hello">Hello</a></li><li class="breadcrumb-item"><a href="/child/help" title="Child Second">Child Second</a></li><li class="breadcrumb-item active">First Child-child</li></ul>', $navigation->renderBreadcrumb());
     }
 }
