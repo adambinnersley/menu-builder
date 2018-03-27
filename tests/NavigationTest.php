@@ -195,6 +195,8 @@ class NavigationTest extends TestCase {
     public function testRender(){
         $this->navigation->addLink('Home' , '/');
         $this->assertEquals('<ul class="nav navbar-nav"><li><a href="/" title="Home">Home</a></li></ul>', $this->navigation->render());
+        $this->navigation->addLink('About Me' , '/about-me')->setCurrentURI('/');
+        $this->assertEquals('<ul class="nav navbar-nav"><li class="active"><a href="/" title="Home" class="active">Home</a></li><li><a href="/about-me" title="About Me">About Me</a></li><</ul>', $this->navigation->render());
     }
     
     /**
