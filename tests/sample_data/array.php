@@ -11,7 +11,6 @@ $nav_array = [
         'title' => 'Google',
         'uri' => 'https://www.google.co.uk',
         'fragment' => 'help',
-        'order' => 4,
         'target' => '_blank',
         'rel' => 'nofollow noopener',
         'class' => NULL,
@@ -20,7 +19,6 @@ $nav_array = [
     [
         'title' => 'Last',
         'uri' => '/last-link',
-        'order' => 1000,
         'children' => [
             [
                 'title' => 'Hippo',
@@ -76,8 +74,7 @@ $nav_array = [
                 'children' => [
                     [
                         'title' => 'Child-child Second',
-                        'uri' => '/child/child/help',
-                        'order' => 2
+                        'uri' => '/child/child/help'
                     ],
                     [
                         'title' => 'First Child-child',
@@ -86,8 +83,7 @@ $nav_array = [
                     ],
                     [
                         'title' => 'Last Child-child',
-                        'uri' => '/child/child/last-link',
-                        'order' => 5
+                        'uri' => '/child/child/last-link'
                     ]
                 ]
             ],
