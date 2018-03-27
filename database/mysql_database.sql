@@ -21,5 +21,5 @@ CREATE TABLE IF NOT EXISTS `menu_items` (
 --
 -- Constraints
 --
-ALTER TABLE `link`
-  ADD CONSTRAINT `menu_items_ibfk_1` FOREIGN KEY (`sub_page_of`) REFERENCES `link` (`link_id`) ON DELETE SET NULL ON UPDATE CASCADE;
+ALTER TABLE `menu_items`
+  ADD CONSTRAINT `menu_items_ibfk_1` FOREIGN KEY (`sub_page_of`) REFERENCES `menu_items` (`link_id`) ON DELETE SET NULL ON UPDATE CASCADE;
