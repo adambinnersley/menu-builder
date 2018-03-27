@@ -186,6 +186,9 @@ class NavigationTest extends TestCase {
      * @covers Menu\Builder\Link::href
      * @covers Menu\Builder\Link::htmlClass
      * @covers Menu\Builder\Link::htmlID
+     * @covers Menu\Helpers\Levels::getCurrent
+     * @covers Menu\Helpers\Levels::getCurrentItem
+     * @covers Menu\Helpers\Levels::iterateItems
      * @covers Menu\Helpers\URI::getHref
      * @covers Menu\Helpers\URI::setURI
      * @covers Menu\Helpers\URI::getURI
@@ -215,6 +218,9 @@ class NavigationTest extends TestCase {
      * @covers Menu\Builder\Breadcrumb::getActiveClass
      * @covers Menu\Builder\Breadcrumb::isBreadcrumbList
      * @covers Menu\Builder\Breadcrumb::createBreadcrumb
+     * @covers Menu\Helpers\Levels::getCurrent
+     * @covers Menu\Helpers\Levels::getCurrentItem
+     * @covers Menu\Helpers\Levels::iterateItems
      * @covers Menu\Builder\Link::htmlClass
      * @covers Menu\Builder\Link::label
      * @covers Menu\Builder\Link::formatLink
