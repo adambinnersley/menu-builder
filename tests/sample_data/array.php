@@ -58,8 +58,8 @@ $nav_array = [
         'title' => 'Home',
         'uri' => '/my-link',
         'order' => -1000,
-        'liclass' => 'first',
-        'liid' => 'ny-id',
+        'li_class' => 'first',
+        'li_id' => 'my-id',
     ],
     [
         'title' => 'Hello',
@@ -98,5 +98,10 @@ $nav_array = [
                 'order' => 5
             ]
         ]
+    ],
+    [
+        'title' => 'No Link',
+        'order' => 1000
     ]
+    
 ];
