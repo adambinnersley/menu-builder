@@ -91,7 +91,6 @@ class Navigation {
         if(is_string($this->elements['ul_class'])){
             return $this->elements['ul_class'];
         }
-        return false;
     }
     
     /**
@@ -117,7 +116,6 @@ class Navigation {
         if(is_string($this->elements['ul_id'])){
             return $this->elements['ul_id'];
         }
-        return false;
     }
     
     /**
