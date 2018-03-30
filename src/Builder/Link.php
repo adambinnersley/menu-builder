@@ -4,6 +4,14 @@ namespace Menu\Builder;
 use Menu\Helpers\URI;
 
 class Link {
+    
+    public static $dropdownLinkExtras = false;
+    
+    public static $caretElement = false;
+    
+    public static $linkDefaults = [];
+    
+    
     /**
      * Returns the HTML title element
      * @param array $link This should be an array containing all of the set link values
@@ -85,14 +93,27 @@ class Link {
         }
         return false;
     }
+    
+    /**
+     * Inserts a given font ion in a span class
+     * @param string $class This should be the font class(es) to apply to the element
+     * @return string|boolean If the font icon is set will return a string else will return false
+     */
+    public static function fontIcon($class){
+        if(is_string($class) && !empty(trim($class))){
+            return '<span class="'.trim($class).'"></span> ';
+        }
+        return false;
+    }
 
     /**
      * Returns a formatted link with all of the attributes 
      * @param array $link This should be an array containing all of the set link values
      * @param string $activeClass If the link is active should have the active class string set else should be empty
+     * @param boolean If the element has any child elements set to true else set to false
      * @return string The HTML link element will be returned
      */
-    public static function formatLink($link, $activeClass) {
-        return "<a".self::href($link).self::title($link).self::htmlClass($link['class'], $activeClass).self::target($link).self::rel($link).self::htmlID($link['id']).">".self::label($link)."</a>";
+    public static function formatLink($link, $activeClass, $hasChild = false, $breadcrumbLink = false) {
+        return "<a".self::href($link).self::title($link).self::htmlClass(($breadcrumbLink ? '' : self::$linkDefaults['a_default'].' ').$link['class'], $activeClass).self::target($link).self::rel($link).self::htmlID($link['id']).($hasChild ? self::$dropdownLinkExtras : '').">".($breadcrumbLink ? '' : self::fontIcon($link['font-icon'])).self::label($link).($hasChild ? self::$caretElement : '')."</a>";
     }
 }

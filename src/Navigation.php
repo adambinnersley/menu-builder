@@ -20,7 +20,25 @@ class Navigation {
      * The elements to assign to the navigation element
      * @var array 
      */
-    protected $elements = ['ul_class' => 'nav navbar-nav', 'ul_id' => ''];
+    protected $menuElements = [
+        'ul_class' => 'nav navbar-nav',
+        'ul_id' => '',
+        'ul_default' => '',
+        'li_default' => 'nav-item',
+        'a_default' => 'nav-link'
+    ];
+    
+    /**
+     * The caret element information to add to a link with a dropdown
+     * @var string|false
+     */
+    public $caretElement = ' <span class="caret"></span>';
+    
+    /**
+     * Any additional elements to add to a link with a dropdown element
+     * @var string|false
+     */
+    public $dropdownLinkExtras = ' data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"';
     
     /**
      * The class that should be assigned on active link elements
@@ -52,7 +70,7 @@ class Navigation {
      */
     public $maxLevels = 4;
     
-    protected $allowedElements = ['label', 'uri', 'fragment', 'title', 'target', 'rel', 'class', 'id', 'order', 'active', 'li_class', 'li_id', 'ul_class', 'ul_id', 'children'];
+    protected $allowedElements = ['label', 'uri', 'fragment', 'title', 'target', 'rel', 'class', 'id', 'order', 'active', 'li_class', 'li_id', 'ul_class', 'ul_id', 'children', 'child_wrap', 'font-icon'];
 
     /**
      * Constructor
@@ -75,10 +93,10 @@ class Navigation {
      */
     public function setNavigationClass($class) {
         if(is_string($class) && !empty(trim($class))){
-            $this->elements['ul_class'] = $class;
+            $this->menuElements['ul_class'] = $class;
         }
         if((is_string($class) && empty(trim($class))) || $class === false){
-            $this->elements['ul_class'] = '';
+            $this->menuElements['ul_class'] = '';
         }
         return $this;
     }
@@ -88,7 +106,7 @@ class Navigation {
      * @return string|false If the navigation class is set will return a string else will return false
      */
     public function getNavigationClass() {
-        return $this->elements['ul_class'];
+        return $this->menuElements['ul_class'];
     }
     
     /**
@@ -98,10 +116,10 @@ class Navigation {
      */
     public function setNavigationID($id) {
         if(is_string($id) && !empty(trim($id))){
-            $this->elements['ul_id'] = $id;
+            $this->menuElements['ul_id'] = $id;
         }
         if((is_string($id) && empty(trim($id))) || $id === false){
-            $this->elements['ul_id'] = '';
+            $this->menuElements['ul_id'] = '';
         }
         return $this;
     }
@@ -111,7 +129,7 @@ class Navigation {
      * @return string|false If the navigation id is set will return a string else will return false
      */
     public function getNavigationID() {
-        return $this->elements['ul_id'];
+        return $this->menuElements['ul_id'];
     }
     
     /**
@@ -132,6 +150,19 @@ class Navigation {
      */
     public function getActiveClass(){
         return $this->activeClass;
+    }
+    
+    /**
+     * Change the default class assigned to all elements of a certain type in the menu
+     * @param string|boolean $class This should be the class you want to assign to all elements or false for no default
+     * @param string $element The element that you are changing the default for can be 'a', 'li' or 'ul'
+     * @return $this
+     */
+    public function setDefaultClass($class, $element = 'li'){
+        if(in_array($element, ['a', 'li', 'ul']) && ((is_string($class) && !empty(trim($class))) || is_bool($class))) {
+            $this->menuElements[strtolower($element).'_default'] = $class;
+        }
+        return $this;
     }
     
     /**
@@ -280,7 +311,7 @@ class Navigation {
      * @return string THe formatted menu item will be returned
      */
     public function render() {
-        return Menu::build($this->navigation, $this->elements, $this->currentArray, $this->getActiveClass(), $this->getStartLevel(), $this->getMaxLevels());
+        return Menu::build($this->navigation, $this->menuElements, $this->currentArray, $this->getActiveClass(), $this->getStartLevel(), $this->getMaxLevels(), $this->caretElement, $this->dropdownLinkExtras);
     }
     
     /**

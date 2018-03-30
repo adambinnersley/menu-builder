@@ -134,11 +134,11 @@ class Breadcrumb {
      */
     public function createBreadcrumb($class = 'breadcrumb', $itemClass = 'breadcrumb-item', $list = true) {
         $breadcrumb = (($list === true && $this->getBreadcrumbElement() !== false) ? '<'.$this->getBreadcrumbElement().(!empty(trim($class)) ? ' class="'.$class.'"' : '').'>' : '');
-        if($this->navArray[0]['uri'] !== $this->links[0]['uri']){$breadcrumb.= (($list === true && $this->isBreadcrumbList() !== false) ? '<li'.(!empty(trim($itemClass)) ? Link::htmlClass($itemClass, '') : '').'>' : '').Link::formatLink($this->navArray[0], '').($list === true && $this->isBreadcrumbList() ? '</li>' : '');}
+        if($this->navArray[0]['uri'] !== $this->links[0]['uri']){$breadcrumb.= (($list === true && $this->isBreadcrumbList() !== false) ? '<li'.(!empty(trim($itemClass)) ? Link::htmlClass($itemClass, '') : '').'>' : '').Link::formatLink($this->navArray[0], '', false, true).($list === true && $this->isBreadcrumbList() ? '</li>' : '');}
         $numlinks = (count($this->links) - 1);
         for($i = 0; $i <= $numlinks; $i++) {
             $breadcrumb.= ($list === true ? '<'.($this->isBreadcrumbList() ? 'li' : 'span').(!empty(trim($itemClass)) ? Link::htmlClass($itemClass, ($i === $numlinks ? $this->getActiveClass() : '')) : '').'>' : $this->getBreadcrumbSeparator())
-            .($i === $numlinks ? Link::label($this->links[$i]) : Link::formatLink($this->links[$i], ''))
+            .($i === $numlinks ? Link::label($this->links[$i]) : Link::formatLink($this->links[$i], '', false, true))
             .($list === true ? '</'.($this->isBreadcrumbList() ? 'li' : 'span').'>' : '');
         }
         return $breadcrumb.(($list === true && $this->getBreadcrumbElement() !== false) ? '</'.$this->getBreadcrumbElement().'>' : '');

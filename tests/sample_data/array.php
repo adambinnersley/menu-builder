@@ -19,6 +19,7 @@ $nav_array = [
     [
         'title' => 'Last',
         'uri' => '/last-link',
+        'child_wrap' => ['div', 'children'],
         'children' => [
             [
                 'title' => 'Hippo',
@@ -60,6 +61,7 @@ $nav_array = [
         'order' => -1000,
         'li_class' => 'first',
         'li_id' => 'my-id',
+        'font-icon' => 'fa fa-home'
     ],
     [
         'title' => 'Hello',
