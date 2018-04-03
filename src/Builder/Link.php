@@ -5,10 +5,22 @@ use Menu\Helpers\URI;
 
 class Link {
     
+    /**
+     * Any additional elements to add to a link with a dropdown element
+     * @var string|false
+     */
     public static $dropdownLinkExtras = false;
     
+    /**
+     * The caret element information to add to a link with a dropdown
+     * @var string|false 
+     */
     public static $caretElement = false;
     
+    /**
+     * The default elements to assign to all links
+     * @var array 
+     */
     public static $linkDefaults = [];
     
     
