@@ -79,7 +79,7 @@ class Navigation {
      */
     public function __construct($navArray = false, $currentUri = '') {
         if (is_array($navArray)) {
-            $this->addLinks($navArray);
+            $this->addLinks($navArray, false);
         }
         if(!empty(trim($currentUri))){
             $this->setCurrentURI($currentUri);
@@ -255,12 +255,13 @@ class Navigation {
     /**
      * Add link(s) to the existing navigation array
      * @param array $array This should be the link array information
+     * @param boolean $sort If you want to resort the array set to true else set to false
      * @return $this
      */
-    public function addLinks($array) {
+    public function addLinks($array, $sort = true) {
         if (is_array($array)) {
             $navArray = array_merge($this->navigation, $array);
-            $this->navigation = Sorting::sort($navArray);
+            $this->navigation = ($sort === true ? Sorting::sort($navArray) : $navArray);
             if(!empty(trim($this->getCurrentURI()))){$this->setCurrentURI($this->getCurrentURI());}
         }
         return $this;
