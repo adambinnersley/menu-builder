@@ -28,35 +28,35 @@ $navigation = new Menu\Navigation();
 Add some menu items
 ```php
 // Add links individually
-$navigation->addLink('Home', '/', array('order' => -1000));
-$navigation->addLink('About Me', '/about-me', array('order' => 2));
+$navigation->addLink('Home', '/', array('link_order' => -1000));
+$navigation->addLink('About Me', '/about-me', array('link_order' => 2));
 
 // Add an array of links
 $navArray = [
     [
         'title' => 'My Link',
         'uri' => '/my-link-page',
-        'order' => 3
+        'link_order' => 3
     ],
     [
         'title' => 'Has Children',
         'uri' => '/child/',
-        'order' => 4
+        'link_order' => 4
         'children' => [
             [
                 'title' => 'Second Child',
                 'uri' => '/child/second',
-                'order' => 2
+                'link_order' => 2
             ],
             [
                 'title' => 'First Child',
                 'uri' => '/child/first',
-                'order' => 1
+                'link_order' => 1
             ],
             [
                 'title' => 'Last Child',
                 'uri' => '/child/last',
-                'order' => 3
+                'link_order' => 3
             ],
         ]
     ]
@@ -71,7 +71,7 @@ $navigation->addLink($title, $uri [, $options = []]);
 ```
  - `$title` Is a string that should contain the test to display on the link
  - `$uri` Is a string that should contain the link URI
- - `$options` Is an array that can contain any of the following array elements ['label', 'uri', 'fragment', 'title', 'target', 'rel', 'class', 'id', 'order', 'active', 'li_class', 'li_id', 'ul_class', 'ul_id', 'children']
+ - `$options` Is an array that can contain any of the following array elements ['label', 'uri', 'fragment', 'title', 'target', 'rel', 'class', 'id', 'link_order', 'active', 'li_class', 'li_id', 'ul_class', 'ul_id', 'children']
 
 ### Set Current URI
 

@@ -10,10 +10,10 @@ class Sorting {
      * @return int
      */
     protected static function sortByOrder($a, $b) {
-        if(!isset($a['order']) && isset($b['order'])){$a['order'] = ($b['order'] + 1);}
-        if(!isset($b['order']) && isset($a['order'])){$b['order'] = ($a['order'] + 1);}
-        if(isset($a['order']) && isset($b['order']) && is_numeric($a['order']) && is_numeric($b['order'])){
-            return intval($a['order']) - intval($b['order']);
+        if(!isset($a['link_order']) && isset($b['link_order'])){$a['link_order'] = ($b['link_order'] + 1);}
+        if(!isset($b['link_order']) && isset($a['link_order'])){$b['link_order'] = ($a['link_order'] + 1);}
+        if(isset($a['link_order']) && isset($b['link_order']) && is_numeric($a['link_order']) && is_numeric($b['link_order'])){
+            return intval($a['link_order']) - intval($b['link_order']);
         }
         return 0;
     }

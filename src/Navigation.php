@@ -70,7 +70,7 @@ class Navigation {
      */
     public $maxLevels = 4;
     
-    protected $allowedElements = ['label', 'uri', 'fragment', 'title', 'target', 'rel', 'class', 'id', 'order', 'active', 'li_class', 'li_id', 'ul_class', 'ul_id', 'children', 'child_wrap', 'font-icon'];
+    protected $allowedElements = ['label', 'uri', 'fragment', 'title', 'target', 'rel', 'class', 'id', 'link_order', 'active', 'li_class', 'li_id', 'ul_class', 'ul_id', 'children', 'child_wrap', 'font-icon'];
 
     /**
      * Constructor

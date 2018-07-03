@@ -4,7 +4,7 @@ $nav_array = [
     [
         'title' => 'Second',
         'uri' => '/help',
-        'order' => 2,
+        'link_order' => 2,
         'active' => 1
     ],
     [
@@ -24,41 +24,41 @@ $nav_array = [
             [
                 'title' => 'Hippo',
                 'uri' => '/child/hippo',
-                'order' => 2,
+                'link_order' => 2,
                 'children' => [
                     [
                         'title' => 'Animal',
                         'uri' => '/child/child/animals',
-                        'order' => 2
+                        'link_order' => 2
                     ],
                     [
                         'title' => 'Car',
                         'uri' => '/child/child/cars',
-                        'order' => 1
+                        'link_order' => 1
                     ],
                     [
                         'title' => 'Place',
                         'uri' => '/child/child/places',
-                        'order' => 5
+                        'link_order' => 5
                     ]
                 ]
             ],
             [
                 'title' => 'Turkey',
                 'uri' => '/child/turkey',
-                'order' => 1
+                'link_order' => 1
             ],
             [
                 'title' => 'Dog',
                 'uri' => '/child/dog',
-                'order' => 5
+                'link_order' => 5
             ]
         ]
     ],
     [
         'title' => 'Home',
         'uri' => '/my-link',
-        'order' => -1000,
+        'link_order' => -1000,
         'li_class' => 'first',
         'li_id' => 'my-id',
         'font-icon' => 'fa fa-home'
@@ -66,13 +66,13 @@ $nav_array = [
     [
         'title' => 'Hello',
         'uri' => '/hello',
-        'order' => 3,
+        'link_order' => 3,
         'ul_class' => 'sub-menu',
         'children' => [
             [
                 'title' => 'Child Second',
                 'uri' => '/child/help',
-                'order' => 2,
+                'link_order' => 2,
                 'children' => [
                     [
                         'title' => 'Child-child Second',
@@ -81,7 +81,7 @@ $nav_array = [
                     [
                         'title' => 'First Child-child',
                         'uri' => '/child/child/google',
-                        'order' => 1
+                        'link_order' => 1
                     ],
                     [
                         'title' => 'Last Child-child',
@@ -92,18 +92,18 @@ $nav_array = [
             [
                 'title' => 'First child',
                 'uri' => '/child/google',
-                'order' => 1
+                'link_order' => 1
             ],
             [
                 'title' => 'Last Child',
                 'uri' => '/child/last-link',
-                'order' => 5
+                'link_order' => 5
             ]
         ]
     ],
     [
         'title' => 'No Link',
-        'order' => 1000
+        'link_order' => 1000
     ]
     
 ];
