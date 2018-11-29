@@ -162,6 +162,9 @@ class Navigation {
         if(in_array($element, ['a', 'li', 'ul']) && ((is_string($class) && !empty(trim($class))) || is_bool($class))) {
             $this->menuElements[strtolower($element).'_default'] = $class;
         }
+        elseif(in_array($element, $this->allowedElements)){
+            $this->menuElements[strtolower($element)] = $class;
+        }
         return $this;
     }
     
