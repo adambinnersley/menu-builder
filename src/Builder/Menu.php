@@ -18,7 +18,7 @@ class Menu {
         foreach($array as $item){
             $active = ($currentItems[$level]['uri'] === $item['uri'] ? trim($activeClass) : '');
             $has_child_elements = (is_array($item['children']) && !empty($item['children']) && $level < ($startLevel + $numLevels) ? true : false);
-            $menu.= ($level >= $startLevel || $currentItems[$level]['uri'] === $item['uri'] ? ($level < $startLevel && $currentItems[$level]['uri'] === $item['uri'] ? (is_array($item['children']) ? self::createMenuLevel($item['children'], ($level + 1), $elements, $currentItems, $activeClass, $startLevel, $numLevels) : '') : (((isset($item['active']) && boolval($item['active']) === true) || !isset($item['active'])) ? '<li'.Link::htmlClass($elements['li_default'].' '.$item['li_class'], $active).Link::htmlID($item['li_id']).'>'.Link::formatLink($item, $active, $has_child_elements).($has_child_elements ? self::wrapChildren($elements, self::createMenuLevel($item['children'], ($level + 1), $item, $currentItems, $activeClass, $startLevel, $numLevels)) : '').'</li>' : '')) : '');
+            $menu.= ($level >= $startLevel || $currentItems[$level]['uri'] === $item['uri'] ? ($level < $startLevel && $currentItems[$level]['uri'] === $item['uri'] ? (is_array($item['children']) ? self::createMenuLevel($item['children'], ($level + 1), $elements, $currentItems, $activeClass, $startLevel, $numLevels) : '') : (((isset($item['active']) && boolval($item['active']) === true) || !isset($item['active'])) ? '<li'.Link::htmlClass($elements['li_default'].' '.$item['li_class'], $active).Link::htmlID($item['li_id']).'>'.Link::formatLink($item, $active, $has_child_elements).($has_child_elements ? self::wrapChildren($item, self::createMenuLevel($item['children'], ($level + 1), $item, $currentItems, $activeClass, $startLevel, $numLevels)) : '').'</li>' : '')) : '');
         }
         $menu.= ($level >= $startLevel ? '</ul>' : '');
         return $menu;
@@ -31,7 +31,7 @@ class Menu {
      * @return string Will return the child elements in the wrapped element if required 
      */
     protected static function wrapChildren($item, $children){
-        if((is_string($item['child_wrap']) || is_array($item['child_wrap'])) && !empty($item['child_wrap'])){
+        if((is_string($item['child_wrap']) || (is_array($item['child_wrap'])) && !empty($item['child_wrap']))){
             return (is_array($item['child_wrap']) ? '<'.$item['child_wrap'][0].' class="'.$item['child_wrap'][1].'">' : '<'.$item['child_wrap'].'>').$children.(is_array($item['child_wrap']) ? '</'.$item['child_wrap'][0].'>' : '</'.$item['child_wrap'].'>');
         }
         return $children;
