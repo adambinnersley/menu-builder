@@ -6,6 +6,7 @@ use Menu\Builder\Menu;
 use Menu\Builder\Breadcrumb;
 use Menu\Helpers\Sorting;
 use Menu\Helpers\Levels;
+use Menu\Helpers\Removal;
 use InvalidArgumentException;
 
 class Navigation {
@@ -299,6 +300,19 @@ class Navigation {
             return true;
         }
         return false;
+    }
+    
+    /**
+     * Remove all of the custom styling from the menu elements and revert back to only default
+     * @param array $extra This should be an array of any additional array keys that need to be removed
+     * @return $this
+     */
+    public function removeCustomStyling($extra = []){
+        $items = array_merge(['class', 'id', 'li_class', 'li_id', 'ul_class', 'ul_id'], $extra);
+        foreach ($items as $remove){
+            $this->navigation = Removal::removeArrayKey($this->navigation, $remove);
+        }
+        return $this;
     }
     
     /**
