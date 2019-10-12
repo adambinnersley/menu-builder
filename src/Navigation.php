@@ -311,6 +311,7 @@ class Navigation {
         $items = array_merge(['class', 'id', 'li_class', 'li_id', 'ul_class', 'ul_id'], $extra);
         foreach ($items as $remove){
             $this->navigation = Removal::removeArrayKey($this->navigation, $remove);
+            $this->currentArray = Removal::removeArrayKey($this->currentArray, $remove);
         }
         return $this;
     }
