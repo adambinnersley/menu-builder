@@ -16,7 +16,7 @@ class Menu {
     protected static function createMenuLevel($array, $level, $elements = [], $currentItems = [], $activeClass = 'active', $startLevel = 0, $numLevels = 2){
         $menu = ($level >= $startLevel ? '<ul'.Link::htmlClass($elements['ul_default'].' '.$elements['ul_class'], '').Link::htmlID($elements['ul_id']).'>' : '');
         foreach($array as $item){
-            $active = ($currentItems[$level]['uri'] === $item['uri'] ? trim($activeClass) : '');
+            $active = (isset($currentItems[$level]['uri']) && $currentItems[$level]['uri'] === $item['uri'] ? trim($activeClass) : '');
             $has_child_elements = (is_array($item['children']) && !empty($item['children']) && $level < ($startLevel + $numLevels) ? true : false);
             $menu.= ($level >= $startLevel || $currentItems[$level]['uri'] === $item['uri'] ? ($level < $startLevel && $currentItems[$level]['uri'] === $item['uri'] ? (is_array($item['children']) ? self::createMenuLevel($item['children'], ($level + 1), $elements, $currentItems, $activeClass, $startLevel, $numLevels) : '') : (((isset($item['active']) && boolval($item['active']) === true) || !isset($item['active'])) ? '<li'.Link::htmlClass($elements['li_default'].' '.$item['li_class'], $active).Link::htmlID($item['li_id']).'>'.Link::formatLink($item, $active, $has_child_elements).($has_child_elements ? self::wrapChildren($item, self::createMenuLevel($item['children'], ($level + 1), $item, $currentItems, $activeClass, $startLevel, $numLevels)) : '').'</li>' : '')) : '');
         }
