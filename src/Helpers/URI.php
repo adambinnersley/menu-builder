@@ -58,7 +58,7 @@ class URI {
      */
     public static function getHref($link) {
         self::setURI($link['uri']);
-        self::setAnchorPoint($link['fragment']);
+        if(isset($link['fragment'])){self::setAnchorPoint($link['fragment']);}
         return self::getURI().self::getAnchorPoint();
     }
 }
