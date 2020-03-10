@@ -1,5 +1,5 @@
 CREATE TABLE IF NOT EXISTS `menu_items` (
-  `link_id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT,
+  `page_id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT,
   `label` varchar(100) DEFAULT NULL,
   `uri` varchar(150) DEFAULT NULL,
   `fragment` varchar(50) DEFAULT NULL,
@@ -14,7 +14,7 @@ CREATE TABLE IF NOT EXISTS `menu_items` (
   `ul_class` varchar(50) DEFAULT NULL,
   `ul_id` varchar(30) DEFAULT NULL,
   `active` tinyint(3) UNSIGNED NOT NULL DEFAULT '1',
-  PRIMARY KEY (`link_id`),
+  PRIMARY KEY (`page_id`),
   KEY `subof` (`sub_page_of`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -22,4 +22,4 @@ CREATE TABLE IF NOT EXISTS `menu_items` (
 -- Constraints
 --
 ALTER TABLE `menu_items`
-  ADD CONSTRAINT `menu_items_ibfk_1` FOREIGN KEY (`sub_page_of`) REFERENCES `menu_items` (`link_id`) ON DELETE SET NULL ON UPDATE CASCADE;
+  ADD CONSTRAINT `menu_items_ibfk_1` FOREIGN KEY (`sub_page_of`) REFERENCES `menu_items` (`page_id`) ON DELETE SET NULL ON UPDATE CASCADE;
