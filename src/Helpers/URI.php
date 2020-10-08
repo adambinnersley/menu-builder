@@ -4,7 +4,8 @@ namespace Menu\Helpers;
 
 use InvalidArgumentException;
 
-class URI {
+class URI
+{
     protected static $uri;
     protected static $anchor;
     
@@ -13,8 +14,9 @@ class URI {
      * @param string $uri This should be the link string
      * @throws InvalidArgumentException
      */
-    protected static function setURI($uri){
-        if(!is_string($uri)){
+    protected static function setURI($uri)
+    {
+        if (!is_string($uri)) {
             throw new InvalidArgumentException(
                 '$uri must be a string or null'
             );
@@ -26,7 +28,8 @@ class URI {
      * Returns the URI for the link
      * @return string Returns the URI for the link
      */
-    protected static function getURI(){
+    protected static function getURI()
+    {
         return self::$uri;
     }
     
@@ -34,11 +37,11 @@ class URI {
      * Sets the anchor point for the link
      * @param mixed $anchor If the anchor point exists set to the string here
      */
-    protected static function setAnchorPoint($anchor){
-        if(is_string($anchor) && !empty(trim($anchor))){
+    protected static function setAnchorPoint($anchor)
+    {
+        if (is_string($anchor) && !empty(trim($anchor))) {
             self::$anchor = '#'.trim($anchor, '#');
-        }
-        else{
+        } else {
             self::$anchor = false;
         }
     }
@@ -47,18 +50,25 @@ class URI {
      * Returns the anchor point for the link if it exists
      * @return string|false Returns the anchor point if it exists else will return false
      */
-    protected static function getAnchorPoint(){
+    protected static function getAnchorPoint()
+    {
         return self::$anchor;
     }
 
     /**
-     * Returns the correctly formatted link string 
+     * Returns the correctly formatted link string
      * @param array $link This should be the link information
      * @return mixed Will return the link string if it exists else will return false
      */
-    public static function getHref($link) {
+    public static function getHref($link)
+    {
         self::setURI($link['uri']);
-        if(isset($link['fragment'])){self::setAnchorPoint($link['fragment']);}
+        if (isset($link['fragment'])) {
+            self::setAnchorPoint($link['fragment']);
+        }
+        else{
+            self::setAnchorPoint('');
+        }
         return self::getURI().self::getAnchorPoint();
     }
 }
