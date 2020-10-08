@@ -3,7 +3,7 @@
     "description": "Build a HTML navigation",
     "type": "library",
     "require-dev": {
-        "phpunit/phpunit": "^8.2"
+        "phpunit/phpunit": "*"
     },
     "license": "MIT",
     "authors": [

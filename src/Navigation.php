@@ -9,17 +9,18 @@ use Menu\Helpers\Levels;
 use Menu\Helpers\Removal;
 use InvalidArgumentException;
 
-class Navigation {
+class Navigation
+{
     
     /**
      * This should be the array of navigation items
-     * @var array 
+     * @var array
      */
     protected $navigation = [];
     
     /**
      * The elements to assign to the navigation element
-     * @var array 
+     * @var array
      */
     protected $menuElements = [
         'ul_class' => 'nav navbar-nav',
@@ -43,31 +44,31 @@ class Navigation {
     
     /**
      * The class that should be assigned on active link elements
-     * @var string 
+     * @var string
      */
     protected $activeClass = 'active';
     
     /**
      * The URI of the current page
-     * @var string 
+     * @var string
      */
     protected $currentURI;
     
     /**
      * The array of current link levels
-     * @var array 
+     * @var array
      */
     protected $currentArray = [];
     
     /**
      * The level to start the navigation element on
-     * @var int 
+     * @var int
      */
     public $startLevel = 0;
     
     /**
      * The maximum number of levels to display in the navigation
-     * @var int 
+     * @var int
      */
     public $maxLevels = 4;
     
@@ -78,11 +79,12 @@ class Navigation {
      * @param array|false $navArray This should be the array of navigation items
      * @param string $currentUri This should be the current URI
      */
-    public function __construct($navArray = false, $currentUri = '') {
+    public function __construct($navArray = false, $currentUri = '')
+    {
         if (is_array($navArray)) {
             $this->addLinks($navArray);
         }
-        if(!empty(trim($currentUri))){
+        if (!empty(trim($currentUri))) {
             $this->setCurrentURI($currentUri);
         }
     }
@@ -92,11 +94,12 @@ class Navigation {
      * @param string|false $class This should be a string containing the class you want to set on the main UL element
      * @return $this
      */
-    public function setNavigationClass($class) {
-        if(is_string($class) && !empty(trim($class))){
+    public function setNavigationClass($class)
+    {
+        if (is_string($class) && !empty(trim($class))) {
             $this->menuElements['ul_class'] = $class;
         }
-        if((is_string($class) && empty(trim($class))) || $class === false){
+        if ((is_string($class) && empty(trim($class))) || $class === false) {
             $this->menuElements['ul_class'] = '';
         }
         return $this;
@@ -106,7 +109,8 @@ class Navigation {
      * Returns the navigation class
      * @return string|false If the navigation class is set will return a string else will return false
      */
-    public function getNavigationClass() {
+    public function getNavigationClass()
+    {
         return $this->menuElements['ul_class'];
     }
     
@@ -115,11 +119,12 @@ class Navigation {
      * @param string $id This should be a string containing the id you want to set on the main UL element
      * @return $this
      */
-    public function setNavigationID($id) {
-        if(is_string($id) && !empty(trim($id))){
+    public function setNavigationID($id)
+    {
+        if (is_string($id) && !empty(trim($id))) {
             $this->menuElements['ul_id'] = $id;
         }
-        if((is_string($id) && empty(trim($id))) || $id === false){
+        if ((is_string($id) && empty(trim($id))) || $id === false) {
             $this->menuElements['ul_id'] = '';
         }
         return $this;
@@ -129,7 +134,8 @@ class Navigation {
      * Returns the navigation ID
      * @return string|false If the navigation id is set will return a string else will return false
      */
-    public function getNavigationID() {
+    public function getNavigationID()
+    {
         return $this->menuElements['ul_id'];
     }
     
@@ -138,18 +144,20 @@ class Navigation {
      * @param string $class This should be the class(es) you want to assign to active elements
      * @return $this
      */
-    public function setActiveClass($class){
-        if(is_string($class) && !empty(trim($class))){
+    public function setActiveClass($class)
+    {
+        if (is_string($class) && !empty(trim($class))) {
             $this->activeClass = $class;
         }
         return $this;
     }
     
     /**
-     * Returns the class to assign to active elements 
+     * Returns the class to assign to active elements
      * @return string
      */
-    public function getActiveClass(){
+    public function getActiveClass()
+    {
         return $this->activeClass;
     }
     
@@ -159,11 +167,11 @@ class Navigation {
      * @param string $element The element that you are changing the default for can be 'a', 'li' or 'ul'
      * @return $this
      */
-    public function setDefaultClass($class, $element = 'li'){
-        if(in_array($element, ['a', 'li', 'ul']) && ((is_string($class) && !empty(trim($class))) || is_bool($class))) {
+    public function setDefaultClass($class, $element = 'li')
+    {
+        if (in_array($element, ['a', 'li', 'ul']) && ((is_string($class) && !empty(trim($class))) || is_bool($class))) {
             $this->menuElements[strtolower($element).'_default'] = $class;
-        }
-        elseif(in_array($element, $this->allowedElements)){
+        } elseif (in_array($element, $this->allowedElements)) {
             $this->menuElements[strtolower($element)] = $class;
         }
         return $this;
@@ -174,12 +182,12 @@ class Navigation {
      * @param string $uri This should be the string URI of the active link
      * @return $this
      */
-    public function setCurrentURI($uri) {
-        if(is_string($uri) && !empty(trim($uri))){
+    public function setCurrentURI($uri)
+    {
+        if (is_string($uri) && !empty(trim($uri))) {
             $this->currentURI = $uri;
             $this->currentArray = Levels::getCurrent($this->navigation, $this->currentURI);
-        }
-        else{
+        } else {
             throw new InvalidArgumentException(
                 '$uri must be a valid string when seting the current URI'
             );
@@ -191,7 +199,8 @@ class Navigation {
      * This will be the string of the set active URI
      * @return string
      */
-    public function getCurrentURI() {
+    public function getCurrentURI()
+    {
         return $this->currentURI;
     }
     
@@ -200,8 +209,9 @@ class Navigation {
      * @param int $level The level to start the navigation menu
      * @return $this
      */
-    public function setStartLevel($level){
-        if(is_int($level)) {
+    public function setStartLevel($level)
+    {
+        if (is_int($level)) {
             $this->startLevel = $level;
         }
         return $this;
@@ -211,17 +221,19 @@ class Navigation {
      * Returns the starting level
      * @return int
      */
-    public function getStartLevel(){
+    public function getStartLevel()
+    {
         return $this->startLevel;
     }
     
     /**
-     * Sets the maximum number of levels to display in the navigation 
+     * Sets the maximum number of levels to display in the navigation
      * @param int $levels The number of levels to display
      * @return $this
      */
-    public function setMaxLevels($levels){
-        if(is_int($levels)) {
+    public function setMaxLevels($levels)
+    {
+        if (is_int($levels)) {
             $this->maxLevels = ($levels - 1);
         }
         return $this;
@@ -231,26 +243,27 @@ class Navigation {
      * Returns the maximum number of levels
      * @return int
      */
-    public function getMaxLevels() {
+    public function getMaxLevels()
+    {
         return ($this->maxLevels + 1);
     }
     
     /**
      * Add link(s) to the existing navigation array
      * @param string $label This should be the link text
-     * @param string $uri This should be the link URI 
+     * @param string $uri This should be the link URI
      * @param array $additionalInfo This should be the link array information
      * @return $this
      */
-    public function addLink($label, $uri, $additionalInfo = []) {
-        if(is_string($label) && !empty(trim($label)) && is_string($uri) && is_array($additionalInfo)){
+    public function addLink($label, $uri, $additionalInfo = [])
+    {
+        if (is_string($label) && !empty(trim($label)) && is_string($uri) && is_array($additionalInfo)) {
             $linkInfo[0] = array_intersect_key($additionalInfo, array_flip($this->allowedElements));
             $linkInfo[0]['uri'] = $uri;
             $linkInfo[0]['label'] = $label;
-        }
-        else{
+        } else {
             throw new InvalidArgumentException(
-               'Link must contain a valid string for $label and $uri, additional information must be sent as an array'
+                'Link must contain a valid string for $label and $uri, additional information must be sent as an array'
             );
         }
         return $this->addLinks($linkInfo);
@@ -261,11 +274,14 @@ class Navigation {
      * @param array $array This should be the link array information
      * @return $this
      */
-    public function addLinks($array) {
+    public function addLinks($array)
+    {
         if (is_array($array)) {
             $navArray = array_merge($this->navigation, $array);
             $this->navigation = Sorting::sort($navArray);
-            if(!empty(trim($this->getCurrentURI()))){$this->setCurrentURI($this->getCurrentURI());}
+            if (!empty(trim($this->getCurrentURI()))) {
+                $this->setCurrentURI($this->getCurrentURI());
+            }
         }
         return $this;
     }
@@ -275,9 +291,10 @@ class Navigation {
      * @param string $link The link you are checking to see if the exists in the array
      * @return boolean If the link exists returns true else returns false
      */
-    public function hasLink($link) {
+    public function hasLink($link)
+    {
         $found = false;
-        array_walk_recursive($this->navigation, function($value, $key) use (&$found, $link) {
+        array_walk_recursive($this->navigation, function ($value, $key) use (&$found, $link) {
             if ($value == $link && $key === 'uri') {
                 $found = true;
             }
@@ -290,10 +307,11 @@ class Navigation {
      * @param array $array an array containing the links
      * @return boolean If all of the links exist within the current navigation array return true else returns false
      */
-    public function hasLinks($array) {
-        if(is_array($array)) {
-            foreach($array as $link) {
-                if($this->hasLink($link) === false) {
+    public function hasLinks($array)
+    {
+        if (is_array($array)) {
+            foreach ($array as $link) {
+                if ($this->hasLink($link) === false) {
                     return false;
                 }
             }
@@ -307,9 +325,10 @@ class Navigation {
      * @param array $extra This should be an array of any additional array keys that need to be removed
      * @return $this
      */
-    public function removeCustomStyling($extra = []){
+    public function removeCustomStyling($extra = [])
+    {
         $items = array_merge(['class', 'id', 'li_class', 'li_id', 'ul_class', 'ul_id'], $extra);
-        foreach ($items as $remove){
+        foreach ($items as $remove) {
             $this->navigation = Removal::removeArrayKey($this->navigation, $remove);
             $this->currentArray = Removal::removeArrayKey($this->currentArray, $remove);
         }
@@ -320,7 +339,8 @@ class Navigation {
      * Returns the navigation array
      * @return array Returns the current array containing all of the navigation elements
      */
-    public function toArray() {
+    public function toArray()
+    {
         return $this->navigation;
     }
 
@@ -328,7 +348,8 @@ class Navigation {
      * Returns the HTML navigation string
      * @return string THe formatted menu item will be returned
      */
-    public function render() {
+    public function render()
+    {
         return Menu::build($this->navigation, $this->menuElements, $this->currentArray, $this->getActiveClass(), $this->getStartLevel(), $this->getMaxLevels(), $this->caretElement, $this->dropdownLinkExtras);
     }
     
@@ -339,7 +360,8 @@ class Navigation {
      * @param boolean $list If the menu is a list set to true else set to false
      * @return string
      */
-    public function renderBreadcrumb($class = 'breadcrumb', $itemClass = 'breadcrumb-item', $list = true) {
+    public function renderBreadcrumb($class = 'breadcrumb', $itemClass = 'breadcrumb-item', $list = true)
+    {
         $breadcrumb = new Breadcrumb();
         $breadcrumb->navArray = $this->navigation;
         return $breadcrumb->setBreacrumbLinks($this->currentArray)->createBreadcrumb($class, $itemClass, $list);

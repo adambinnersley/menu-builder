@@ -5,15 +5,18 @@ use PHPUnit\Framework\TestCase;
 use Menu\Navigation;
 use InvalidArgumentException;
 
-class NavigationTest extends TestCase {
+class NavigationTest extends TestCase
+{
     protected $navigation;
     
-    protected function setUp(): void {
+    protected function setUp(): void
+    {
         error_reporting(E_ALL && ~E_NOTICE);
         $this->navigation = new Navigation();
     }
     
-    protected function tearDown(): void {
+    protected function tearDown(): void
+    {
         $this->navigation = null;
     }
     
@@ -21,7 +24,8 @@ class NavigationTest extends TestCase {
      * @covers Menu\Navigation::setNavigationClass
      * @covers Menu\Navigation::getNavigationClass
      */
-    public function testSetNavigationClass(){
+    public function testSetNavigationClass()
+    {
         $this->assertEquals('nav navbar-nav', $this->navigation->getNavigationClass());
         $this->assertObjectHasAttribute('startLevel', $this->navigation->setNavigationClass('my-nav-class'));
         $this->assertEquals('my-nav-class', $this->navigation->getNavigationClass());
@@ -35,7 +39,8 @@ class NavigationTest extends TestCase {
      * @covers Menu\Navigation::setNavigationID
      * @covers Menu\Navigation::getNavigationID
      */
-    public function testSetNavigationID(){
+    public function testSetNavigationID()
+    {
         $this->assertEmpty($this->navigation->getNavigationID());
         $this->assertObjectHasAttribute('startLevel', $this->navigation->setNavigationID('nav-id'));
         $this->assertEquals('nav-id', $this->navigation->getNavigationID());
@@ -49,7 +54,8 @@ class NavigationTest extends TestCase {
      * @covers Menu\Navigation::setActiveClass
      * @covers Menu\Navigation::getActiveClass
      */
-    public function testSetActiveClass(){
+    public function testSetActiveClass()
+    {
         $this->assertEquals('active', $this->navigation->getActiveClass());
         $this->assertObjectHasAttribute('startLevel', $this->navigation->setActiveClass('my-active-class'));
         $this->assertEquals('my-active-class', $this->navigation->getActiveClass());
@@ -66,7 +72,8 @@ class NavigationTest extends TestCase {
      * @covers Menu\Helpers\Levels::getCurrentItem
      * @covers Menu\Helpers\Levels::iterateItems
      */
-    public function testSetCurrentURI(){
+    public function testSetCurrentURI()
+    {
         $this->assertObjectHasAttribute('startLevel', $this->navigation->setCurrentURI('/my-current-uri'));
         $this->assertEquals('/my-current-uri', $this->navigation->getCurrentURI());
         $this->expectException(InvalidArgumentException::class);
@@ -80,7 +87,8 @@ class NavigationTest extends TestCase {
      * @covers Menu\Navigation::setStartLevel
      * @covers Menu\Navigation::getStartLevel
      */
-    public function testSetStartLevel(){
+    public function testSetStartLevel()
+    {
         $this->assertEquals(0, $this->navigation->getStartLevel());
         $this->assertObjectHasAttribute('startLevel', $this->navigation->setStartLevel(1));
         $this->assertEquals(1, $this->navigation->getStartLevel());
@@ -94,7 +102,8 @@ class NavigationTest extends TestCase {
      * @covers Menu\Navigation::setMaxLevels
      * @covers Menu\Navigation::getMaxLevels
      */
-    public function testSetMaxLevels(){
+    public function testSetMaxLevels()
+    {
         $this->assertEquals(5, $this->navigation->getMaxLevels());
         $this->assertObjectHasAttribute('startLevel', $this->navigation->setMaxLevels(1));
         $this->assertEquals(1, $this->navigation->getMaxLevels());
@@ -114,7 +123,8 @@ class NavigationTest extends TestCase {
      * @covers Menu\Helpers\Sorting::sortByOrder
      * @covers Menu\Helpers\Sorting::sortChildElements
      */
-    public function testAddLink(){
+    public function testAddLink()
+    {
         $this->assertFalse($this->navigation->hasLink('/my-link'));
         $this->assertObjectHasAttribute('startLevel', $this->navigation->addLink('My Link', '/my-link'));
         $this->assertTrue($this->navigation->hasLink('/my-link'));
@@ -136,7 +146,8 @@ class NavigationTest extends TestCase {
      * @covers Menu\Helpers\Sorting::sortByOrder
      * @covers Menu\Helpers\Sorting::sortChildElements
      */
-    public function testAddLinks(){
+    public function testAddLinks()
+    {
         include dirname(__FILE__).DIRECTORY_SEPARATOR.'sample_data'.DIRECTORY_SEPARATOR.'array.php';
         $this->assertObjectHasAttribute('startLevel', $this->navigation->addLinks($nav_array));
         $this->assertGreaterThan(3, count($this->navigation->toArray()));
@@ -146,7 +157,8 @@ class NavigationTest extends TestCase {
      * @covers Menu\Navigation::hasLinks
      * @covers Menu\Navigation::hasLink
      */
-    public function testHasLinks(){
+    public function testHasLinks()
+    {
         include dirname(__FILE__).DIRECTORY_SEPARATOR.'sample_data'.DIRECTORY_SEPARATOR.'array.php';
         $this->navigation->addLinks($nav_array);
         $this->assertFalse($this->navigation->hasLinks(['/link-doesnt-exists', '/', '/child/hippo']));
@@ -159,11 +171,12 @@ class NavigationTest extends TestCase {
     /**
      * @covers Menu\Navigation::toArray
      */
-    public function testToArray(){
-        $this->navigation->addLink('Home' , '/');
+    public function testToArray()
+    {
+        $this->navigation->addLink('Home', '/');
         $this->assertEquals(1, count($this->navigation->toArray()));
         $this->assertArrayHasKey('uri', $this->navigation->toArray()[0]);
-        $this->navigation->addLink('New Link' , '/new-link');
+        $this->navigation->addLink('New Link', '/new-link');
         $this->assertEquals(2, count($this->navigation->toArray()));
         $this->assertEquals('New Link', $this->navigation->toArray()[1]['label']);
         $this->assertArrayHasKey('uri', $this->navigation->toArray()[1]);
@@ -196,14 +209,15 @@ class NavigationTest extends TestCase {
      * @covers Menu\Helpers\URI::setAnchorPoint
      * @covers Menu\Helpers\URI::getAnchorPoint
      */
-    public function testRender(){
-        $this->navigation->addLink('Home' , '/');
-        $this->assertEquals('<ul class="nav navbar-nav"><li class="nav-item"><a href="/" title="Home" class="nav-link">Home</a></li></ul>', $this->navigation->render());
-        $this->navigation->addLink('About Me' , '/about-me')->setCurrentURI('/');
-        $this->assertEquals('<ul class="nav navbar-nav"><li class="nav-item active"><a href="/" title="Home" class="nav-link active">Home</a></li><li class="nav-item"><a href="/about-me" title="About Me" class="nav-link">About Me</a></li></ul>', $this->navigation->render());
+    public function testRender()
+    {
+        $this->navigation->addLink('Home', '/');
+        $this->assertEquals('<ul class="nav navbar-nav"><li><a href="/" title="Home" class="nav-link">Home</a></li></ul>', $this->navigation->render());
+        $this->navigation->addLink('About Me', '/about-me')->setCurrentURI('/');
+        $this->assertEquals('<ul class="nav navbar-nav"><li class="active"><a href="/" title="Home" class="nav-link active">Home</a></li><li><a href="/about-me" title="About Me" class="nav-link">About Me</a></li></ul>', $this->navigation->render());
         include dirname(__FILE__).DIRECTORY_SEPARATOR.'sample_data'.DIRECTORY_SEPARATOR.'array.php';
         $navigation = new Navigation($nav_array, '/child/child/google');
-        $this->assertEquals('<ul class="nav navbar-nav"><li class="nav-item first"><a href="/my-link" title="Home" class="nav-link"><span class="fa fa-home"></span> Home</a></li><li class="nav-item"><a href="/help" title="Second" class="nav-link">Second</a></li><li class="nav-item active"><a href="/hello" title="Hello" class="nav-link active" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Hello <span class="caret"></span></a><ul class="sub-menu"><li><a href="/child/google" title="First child" class="nav-link">First child</a></li><li class="active"><a href="/child/help" title="Child Second" class="nav-link active" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Child Second <span class="caret"></span></a><ul><li class="active"><a href="/child/child/google" title="First Child-child" class="nav-link active">First Child-child</a></li><li><a href="/child/child/help" title="Child-child Second" class="nav-link">Child-child Second</a></li><li><a href="/child/child/last-link" title="Last Child-child" class="nav-link">Last Child-child</a></li></ul></li><li><a href="/child/last-link" title="Last Child" class="nav-link">Last Child</a></li></ul></li><li class="nav-item"><a title="No Link" class="nav-link">No Link</a></li><li class="nav-item"><a href="https://www.google.co.uk#help" title="Google" class="nav-link" target="_blank" rel="nofollow noopener" id="unique-link">Google</a></li><li class="nav-item"><a href="/last-link" title="Last" class="nav-link" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Last <span class="caret"></span></a><div class="children"><ul><li><a href="/child/turkey" title="Turkey" class="nav-link">Turkey</a></li><li><a href="/child/hippo" title="Hippo" class="nav-link" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Hippo <span class="caret"></span></a><ul><li><a href="/child/child/cars" title="Car" class="nav-link">Car</a></li><li><a href="/child/child/animals" title="Animal" class="nav-link">Animal</a></li><li><a href="/child/child/places" title="Place" class="nav-link">Place</a></li></ul></li><li><a href="/child/dog" title="Dog" class="nav-link">Dog</a></li></ul></div></li></ul>', $navigation->render());
+        $this->assertEquals('<ul class="nav navbar-nav"><li class="first"><a href="/my-link" title="Home" class="nav-link"><span class="fa fa-home"></span> Home</a></li><li><a href="/help" title="Second" class="nav-link">Second</a></li><li class="active"><a href="/hello" title="Hello" class="nav-link active" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Hello <span class="caret"></span></a><ul class="sub-menu"><li><a href="/child/google" title="First child" class="nav-link">First child</a></li><li class="active"><a href="/child/help" title="Child Second" class="nav-link active" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Child Second <span class="caret"></span></a><ul><li class="active"><a href="/child/child/google" title="First Child-child" class="nav-link active">First Child-child</a></li><li><a href="/child/child/help" title="Child-child Second" class="nav-link">Child-child Second</a></li><li><a href="/child/child/last-link" title="Last Child-child" class="nav-link">Last Child-child</a></li></ul></li><li><a href="/child/last-link" title="Last Child" class="nav-link">Last Child</a></li></ul></li><li><a title="No Link" class="nav-link">No Link</a></li><li><a href="https://www.google.co.uk#help" title="Google" class="nav-link" target="_blank" rel="nofollow noopener" id="unique-link">Google</a></li><li><a href="/last-link" title="Last" class="nav-link" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Last <span class="caret"></span></a><div class="children"><ul><li><a href="/child/turkey" title="Turkey" class="nav-link">Turkey</a></li><li><a href="/child/hippo" title="Hippo" class="nav-link" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Hippo <span class="caret"></span></a><ul><li><a href="/child/child/cars" title="Car" class="nav-link">Car</a></li><li><a href="/child/child/animals" title="Animal" class="nav-link">Animal</a></li><li><a href="/child/child/places" title="Place" class="nav-link">Place</a></li></ul></li><li><a href="/child/dog" title="Dog" class="nav-link">Dog</a></li></ul></div></li></ul>', $navigation->render());
         $this->expectException(InvalidArgumentException::class);
         $invalidNavigation = new Navigation([['title' => 'Home', 'uri' => '/', 'link_order' => -1000], ['title' => 'Invald', 'uri' => 42, 'link_order' => 2]]);
         $this->assertFalse($invalidNavigation->render());
@@ -229,8 +243,9 @@ class NavigationTest extends TestCase {
      * @covers Menu\Builder\Link::label
      * @covers Menu\Builder\Link::formatLink
      */
-    public function testRenderBreadcrumb(){
-        $this->navigation->addLink('Home' , '/');
+    public function testRenderBreadcrumb()
+    {
+        $this->navigation->addLink('Home', '/');
         $this->assertEquals('<ul class="breadcrumb"><li class="breadcrumb-item"><a href="/" title="Home">Home</a></li></ul>', $this->navigation->renderBreadcrumb());
         include dirname(__FILE__).DIRECTORY_SEPARATOR.'sample_data'.DIRECTORY_SEPARATOR.'array.php';
         $navigation = new Navigation($nav_array, '/child/child/google');

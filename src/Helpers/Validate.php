@@ -1,26 +1,29 @@
 <?php
 namespace Menu\Helpers;
 
-class Validate {
+class Validate
+{
     
     /**
      * Validates that a URI is valid
      * @param string $uri This should be the URI you are checking
      * @return boolean If the URI is valid will return true else returns false
      */
-    public static function validateURI($uri) {
-        if(!empty(trim($uri))){
+    public static function validateURI($uri)
+    {
+        if (!empty(trim($uri))) {
             return filter_var(trim($uri), FILTER_VALIDATE_URL);
         }
         return false;
     }
     
     /**
-     * Sanitise a URI 
+     * Sanitise a URI
      * @param string $uri This should be the URI you are sanitising
      * @return string Returns the sanitised URI
      */
-    public static function sanitizeURI($uri) {
+    public static function sanitizeURI($uri)
+    {
         return strtolower(filter_var(trim($uri), FILTER_SANITIZE_URL));
     }
 }

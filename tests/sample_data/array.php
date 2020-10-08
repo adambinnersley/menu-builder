@@ -13,7 +13,7 @@ $nav_array = [
         'fragment' => 'help',
         'target' => '_blank',
         'rel' => 'nofollow noopener',
-        'class' => NULL,
+        'class' => null,
         'id' => 'unique-link',
     ],
     [
