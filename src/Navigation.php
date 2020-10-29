@@ -257,6 +257,7 @@ class Navigation
      */
     public function addLink($label, $uri, $additionalInfo = [])
     {
+        $linkInfo = [];
         if (is_string($label) && !empty(trim($label)) && is_string($uri) && is_array($additionalInfo)) {
             $linkInfo[0] = array_intersect_key($additionalInfo, array_flip($this->allowedElements));
             $linkInfo[0]['uri'] = $uri;
