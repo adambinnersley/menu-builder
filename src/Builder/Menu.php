@@ -10,8 +10,12 @@ class Menu
     /**
      * Creates a menu level
      * @param array $array This should be an array of the menu items
-     * @param int $level
+     * @param int $level The current level that is being built
      * @param array $elements This should be an array containing any attributes to add to the main UL element
+     * @param array $currentItems The array of current items
+     * @param string $activeClass The active classes to add to any active elements
+     * @param int $startLevel The start level of the navigation
+     * @param int $numLevels The number of sub-levels to display
      * @return string Returns the HTML menu string
      */
     protected static function createMenuLevel($array, $level, $elements = [], $currentItems = [], $activeClass = 'active', $startLevel = 0, $numLevels = 2)
@@ -59,6 +63,12 @@ class Menu
      * Build the navigation menu item
      * @param array $array This should be an array of the menu items
      * @param array $elements This should be an array containing any attributes to add to the main UL element
+     * @param array $currentItems The array of current items
+     * @param string $activeClass The active classes to add to any active elements
+     * @param int $startLevel The start level of the navigation
+     * @param int $numLevels The number of sub-levels to display
+     * @param string|false $caret Any caret elements to assign to main elements with a drop-down or set to false for none
+     * @param string|false $linkDDExtras Any extra elements to assign to drop-downs or false for none 
      * @return string Returns the HTML menu string
      */
     public static function build($array, $elements = [], $currentItems = [], $activeClass = 'active', $startLevel = 0, $numLevels = 2, $caret = false, $linkDDExtras = false)
