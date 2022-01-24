@@ -85,7 +85,7 @@ class Navigation
             $this->addLinks($navArray);
         }
         if (!empty(trim($currentUri))) {
-            $this->setCurrentURI($currentUri);
+            $this->setCurrentURI(trim($currentUri));
         }
     }
     
@@ -280,7 +280,7 @@ class Navigation
         if (is_array($array)) {
             $navArray = array_merge($this->navigation, $array);
             $this->navigation = Sorting::sort($navArray);
-            if (!empty(trim($this->getCurrentURI()))) {
+            if (!empty($this->getCurrentURI())) {
                 $this->setCurrentURI($this->getCurrentURI());
             }
         }
